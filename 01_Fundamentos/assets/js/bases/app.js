@@ -10,9 +10,9 @@ let papa = 'Jesus Trujillo';
 let mama = 'Yurleydis Navarro';
 let hija = 'Sarah Trujillo';
 let abuela = 'Etilvia Teheran';
-let año = 2022;
-const INCREMENT = 1;
-let año_actual = año + INCREMENT;
+let año = 2023, mes = 11, dia = 7;
+const año_incrementado = año + 1;
+let fecha_inicio_curso = "Año: "+año_incrementado+" "+"Mes: "+mes+" "+"Dia: "+dia;
 
 // Imprimo todas las variables que desee.
 // console.log('Año actual: ',año_actual);
@@ -22,4 +22,4 @@ let año_actual = año + INCREMENT;
 // console.log('Abuela: ',abuela)
 
 // Puedes imprimir los valores de las variables en tablas de la siguiente manera:
-console.table({papa,mama,hija,abuela,año_actual});
+console.table({papa,mama,hija,abuela,fecha_inicio_curso});
