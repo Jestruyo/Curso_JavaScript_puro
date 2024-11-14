@@ -3,8 +3,8 @@
 
 //Asignacion por valor.
 let num1 = 10;
-let num2 = 5;
-num1 = 7; //Cambio el valor de num1, y se vera afectado en consola.
+let num2 = num1;
+num2 = 7; //Cambio el valor de num1, y se vera afectado en consola.
 console.log({num1,num2});
 
 //Asignacion por referencia.
@@ -24,7 +24,7 @@ let ety   = sarah;
 ety = cambiarNombre({...sarah}); //Los 3 ... Aqui se les conoce como el operador express, y sirve para desasociar una referencia de un objeto.
 console.log({ety});
 
-// En resumen, la diferencia clave es que cuando pasas un valor primitivo, se crea una copia dentro de la función
-// y los cambios no afectan al valor original fuera de la función. Cuando pasas un objeto, estás pasando una referencia,
-// y los cambios dentro de la función afectan al objeto original fuera de la función. Esto es lo que se entiende por
-// "pasar por valor" y "pasar por referencia" en JavaScript.
+// Resumen
+// Asignación por valor: Se usa con tipos primitivos (números, cadenas, booleanos, etc.). Se crea una copia del valor.
+
+// Asignación por referencia: Se usa con objetos y arreglos. Ambas variables apuntan al mismo lugar en memoria, por lo que los cambios afectan a ambas.
