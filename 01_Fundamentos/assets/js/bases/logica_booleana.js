@@ -1,12 +1,9 @@
 // Hablemos de la logica boolean
 
-const regresaTrue = () => {
-    return true;
-}
+const regresaTrue = () =>  true;
 
-const regresaFalse = () => {
-    return false;
-}
+const regresaFalse = () => false;
+
 
 console.warn("Negacion con !");
 // Negacion con (!)
