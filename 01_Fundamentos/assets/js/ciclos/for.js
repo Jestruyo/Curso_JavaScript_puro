@@ -19,8 +19,8 @@ for(vocal of Vocales){
     console.log("Vocal:",vocal);
 }
 console.warn("Combinaciones de for")
-for (i in Dirreccion) {
-    for (j = 0; j < Dirreccion[i].length; j++ ) {
+for (i in Dirreccion) { // for in
+    for (j = 0; j < Dirreccion[i].length; j++ ) { // for estructurados.
         console.log(Dirreccion[i][j])
     }
 }
