@@ -10,10 +10,16 @@
  * las letras J, Q, K su valor en puntos es de 10, mientras que la letra A, tiene el valor de 11.
  */
 
-let deck = [];
-const tipos_de_cartas = ["C", "D", "H", "S"]
-const especiales = ["A","J","Q","K"]
 
+let deck = [];
+const tipos_de_cartas = ["C", "D", "H", "S"];
+const especiales = ["A","J","Q","K"];
+let puntosJugador = 0;
+
+//Referencias de HTML
+const btnPedir = document.querySelector("#btnPedir");
+const puntosHTMLSMALL = document.querySelectorAll("small");
+const divCartasJugador = document.querySelector("#jugador-cartas")
 
 const crearDeck = () => {
     /** 
@@ -32,7 +38,6 @@ const crearDeck = () => {
         }
     }
     deck = _.shuffle(deck);
-    console.log(deck);
     return deck;
 }
 crearDeck();
@@ -47,20 +52,38 @@ const pedirCarta = () => {
         throw "No hay cartas en la baraja."
     }
     const carta = deck.pop();
-    console.log(carta);
     return carta;
 }
 
 const valorCarta = ( carta ) => {
     /**
-     * 
+     * Metodo encargado de asignar un valor numerio
+     * a la carta tratada. Tomando en cuenta si es una letra o numero.
      */
 
     const valor = carta.substring(0, carta.length - 1);
     return ( isNaN(valor) ) ? 
             (valor === "A") ? 11 : 10 
             : valor * 1;
-    
 }
-const valor = valorCarta( pedirCarta() );
-console.log({valor});
+
+//Eventos
+btnPedir.addEventListener("click", () => {
+    /**
+     * Evento responsable de la accido al instante de hacer click,
+     * en el boton pedir carta.
+     */
+
+    const carta = pedirCarta();
+    puntosJugador = puntosJugador + valorCarta(carta); // Suma de puntos
+    puntosHTMLSMALL[0].innerText = puntosJugador; // Pinta los puntos en el HTML
+    const imagCarta = document.createElement("img"); // Crea el elemento img 
+    imagCarta.src = `assets/cartas/${carta}.png`; // Se le agrega el src
+    imagCarta.classList.add('cartas'); // Carge de css cartas al componente img
+    divCartasJugador.append( imagCarta ); // Pinta el elemento en el HTML
+
+    // Validador para desabilitar el boton pedir carta.
+    if (puntosJugador >= 21){
+        btnPedir.disabled = true;
+    }
+});
