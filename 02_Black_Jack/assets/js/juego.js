@@ -83,11 +83,27 @@ const turnoComputadora = ( puntosMinimos ) => {
         imagCarta.classList.add('cartas'); // Carge de css cartas al componente img
         divCartasComputadora.append( imagCarta ); // Pinta el elemento en el HTML
 
-        if(puntosMinimos > 21){
+        if(puntosMinimos > 21){ // Si los puntos del jugador son mayores a 21, ya no tiene sentido que la computadora sigua jugando.
             break;
         }
 
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21) );
+
+    setTimeout(() => {
+        /**
+         * Luego que se termine el hilo del do while, se ejecutara este bloque de codigo,
+         * para no ejecutar los alert, antes que terminen de renderizar las cartas.
+         */
+        if (puntosComputadora === puntosMinimos){
+            alert("Nadie gana: :(");
+        } else if (puntosMinimos > 21 || puntosMinimos > puntosComputadora){
+            alert("Computadora Gana");
+        } else if (puntosComputadora > 21 || puntosComputadora > puntosMinimos) {
+            alert("Jugador Gana");
+        }
+
+    }, 20)
+
 }
 //Eventos
 btnPedir.addEventListener("click", () => {
