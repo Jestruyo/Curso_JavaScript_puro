@@ -18,6 +18,7 @@ let puntosJugador = 0;
 let puntosComputadora = 0;
 
 //Referencias de HTML
+const btnNuevoJuego = document.querySelector("#btnNuevo");
 const btnPedir = document.querySelector("#btnPedir");
 const btnDetener = document.querySelector("#btnDetener");
 const puntosHTMLSMALL = document.querySelectorAll("small");
@@ -43,7 +44,6 @@ const crearDeck = () => {
     deck = _.shuffle(deck);
     return deck;
 }
-crearDeck();
 
 const pedirCarta = () => {
     /**
@@ -89,6 +89,8 @@ const turnoComputadora = ( puntosMinimos ) => {
 
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21) );
 
+    btnNuevoJuego.disabled = false; // Se habilita de nuevo el boton, para la nueva ronda.
+
     setTimeout(() => {
         /**
          * Luego que se termine el hilo del do while, se ejecutara este bloque de codigo,
@@ -132,8 +134,30 @@ btnDetener.addEventListener("click", () => {
      * Evento responsable de la accion, al instante de hacer click,
      * en el boton detener.
      */
-    btnDetener.disabled = true;
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
     turnoComputadora(puntosJugador);
 
+});
+
+btnNuevoJuego.addEventListener("click", () => {
+    /**
+     * Evento encargado de resetear las configuraciones iniciales para un nuevo juego.
+     */
+    deck = crearDeck();
+    console.log({deck})
+
+    btnPedir.disabled = false;
+    btnDetener.disabled = false;
+
+    puntosHTMLSMALL[0].innerText = 0;
+    puntosHTMLSMALL[1].innerText = 0;
+
+    puntosJugador = 0;
+    puntosComputadora = 0;
+
+    divCartasJugador.innerText = " ";
+    divCartasComputadora.innerText = " ";
+
+    btnNuevoJuego.disabled = true;
 });
