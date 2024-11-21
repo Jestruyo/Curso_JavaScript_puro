@@ -15,11 +15,14 @@ let deck = [];
 const tipos_de_cartas = ["C", "D", "H", "S"];
 const especiales = ["A","J","Q","K"];
 let puntosJugador = 0;
+let puntosComputadora = 0;
 
 //Referencias de HTML
 const btnPedir = document.querySelector("#btnPedir");
+const btnDetener = document.querySelector("#btnDetener");
 const puntosHTMLSMALL = document.querySelectorAll("small");
-const divCartasJugador = document.querySelector("#jugador-cartas")
+const divCartasJugador = document.querySelector("#jugador-cartas");
+const  divCartasComputadora = document.querySelector("#computadora-cartas");
 
 const crearDeck = () => {
     /** 
@@ -67,13 +70,31 @@ const valorCarta = ( carta ) => {
             : valor * 1;
 }
 
+// Turno de la computadora
+const turnoComputadora = ( puntosMinimos ) => {
+
+    do {
+        const carta = pedirCarta();
+
+        puntosComputadora = puntosComputadora + valorCarta(carta); // Suma de puntos
+        puntosHTMLSMALL[1].innerText = puntosComputadora; // Pinta los puntos en el HTML
+        const imagCarta = document.createElement("img"); // Crea el elemento img 
+        imagCarta.src = `assets/cartas/${carta}.png`; // Se le agrega el src
+        imagCarta.classList.add('cartas'); // Carge de css cartas al componente img
+        divCartasComputadora.append( imagCarta ); // Pinta el elemento en el HTML
+
+        if(puntosMinimos > 21){
+            break;
+        }
+
+    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21) );
+}
 //Eventos
 btnPedir.addEventListener("click", () => {
     /**
-     * Evento responsable de la accido al instante de hacer click,
+     * Evento responsable de la accion al instante de hacer click,
      * en el boton pedir carta.
      */
-
     const carta = pedirCarta();
     puntosJugador = puntosJugador + valorCarta(carta); // Suma de puntos
     puntosHTMLSMALL[0].innerText = puntosJugador; // Pinta los puntos en el HTML
@@ -82,8 +103,21 @@ btnPedir.addEventListener("click", () => {
     imagCarta.classList.add('cartas'); // Carge de css cartas al componente img
     divCartasJugador.append( imagCarta ); // Pinta el elemento en el HTML
 
-    // Validador para desabilitar el boton pedir carta.
+    // Validador para desabilitar el boton pedir carta y detener en caso que se cumpla la condicion.
     if (puntosJugador >= 21){
         btnPedir.disabled = true;
+        btnDetener.disabled = true;
+        turnoComputadora(puntosJugador);
     }
+});
+
+btnDetener.addEventListener("click", () => {
+    /**
+     * Evento responsable de la accion, al instante de hacer click,
+     * en el boton detener.
+     */
+    btnDetener.disabled = true;
+    btnPedir.disabled = true;
+    turnoComputadora(puntosJugador);
+
 });
