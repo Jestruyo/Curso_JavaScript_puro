@@ -1,5 +1,5 @@
 /**
- * Uso de clases en js de forma clasica.
+ * En este archivo se profundiza el uso de extends para sub-clases en js de forma clasica.
  */
 
 class Persona {
@@ -55,11 +55,34 @@ class Persona {
     };
 }
 
+/**
+ * El uso de extends, nos permite disponer de los atributos y metodos de una clase superior.
+ * Luego dentro del constructor, podemos invocar el metodo super() para inicializar los atributos
+ * heredados y los propios.
+ */
+class Usuario extends Persona {
+    // Atributo estatico local
+    static _conteo_de_instancias_usuario = 0;
+    // Atributo local de usuario
+    codigo;
+
+    constructor(nombre, apellido, edad, codigo = 1140850053){
+        super(nombre, apellido, edad); // Inicializados de atributos heredados.
+        this.codigo = codigo;
+
+        Usuario._conteo_de_instancias_usuario ++;
+    }
+
+    instancias_generales(){
+        console.log("Las instacias de Usuario son: ", Usuario._conteo_de_instancias_usuario);
+    }
+
+
+}
+
 // Instancia de la clase.
-const niña = new Persona( "Sarah", "Trujillo", 11);
-const niño = new Persona( "Jesus", "Trujillo", 11);
-niña.setGenero = "Mujer"; // Uso de set.
-console.log(niña.getGenero); // Uso de Get.
-console.log(niña);
-niña.alertaPersona();
-console.log("Log: ",Persona.getConteo_de_instacion) // Uso del atributo estatico, directo desde la clase.
+const usuario1 = new Usuario("Ricky", "Martin", 43, 11408500231);
+usuario1.setGenero = "Hombre";
+usuario1.alertaPersona();
+usuario1.instancias_generales();
+console.log("Instancia Usuario 1: ", usuario1)
