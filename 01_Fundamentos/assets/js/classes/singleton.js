@@ -31,6 +31,7 @@ class CuentaUsuario {
 const c1 = new CuentaUsuario("Deposito");
 const c2 = new CuentaUsuario("Efectivo");
 const c3 = new CuentaUsuario("Credito");
+
 // Todas retornaran el valor de la primera
 console.log(c1);
 console.log(c2);
