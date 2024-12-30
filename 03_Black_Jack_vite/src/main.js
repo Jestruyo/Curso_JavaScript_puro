@@ -1,4 +1,5 @@
 import './style.css'
+import {shuffle} from 'underscore';
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diaminds
@@ -68,7 +69,7 @@ const moduloDeJuego = (() => {
               deck.push(esp + tipo);
           }
       }
-      return _.shuffle(deck);
+      return shuffle(deck);
   }
 
   const pedirCarta = () => {
