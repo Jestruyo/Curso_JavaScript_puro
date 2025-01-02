@@ -1,11 +1,14 @@
-import {crearDeck} from './useCasesModules/crear-deck.js'
+import {crearDeck} from './useCasesModules/crear-deck.js';
+import usecomponentes from './selectoresHtml/componentesHtml.js';
+import pedirCarta from './useCasesModules/pedirCarta.js';
+import valorCarta from './useCasesModules/valorCarta.js';
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diaminds
  * 2H = Two of Hearts
  * 2S = Two of Spades
- * 
- * 
+ *
+ *
  * Puntos:
  * Los puntos se acumulan de acuerdo a el valor numerico inicial de las cartas, para
  * las letras J, Q, K su valor en puntos es de 10, mientras que la letra A, tiene el valor de 11.
@@ -22,11 +25,11 @@ const moduloDeJuego = (() => {
       puntosJugadores = [];
 
   //Referencias de HTML
-  const btnNuevoJuego = document.querySelector("#btnNuevo"),
-        btnPedir = document.querySelector("#btnPedir"),
-        btnDetener = document.querySelector("#btnDetener"),
-        puntosHTMLSMALL = document.querySelectorAll("small"),
-        divCartasJugadores = document.querySelectorAll(".divCartas");
+  const btnNuevoJuego = usecomponentes("btnNuevoJuego"),
+        btnPedir = usecomponentes("btnPedir"),
+        btnDetener = usecomponentes("btnDetener"),
+        puntosHTMLSMALL = usecomponentes("puntosHTMLSMALL"),
+        divCartasJugadores = usecomponentes("divCartasJugadores");
 
   const inicializarJuego = (numero_jugadores = 2) => {
       /**
@@ -48,30 +51,6 @@ const moduloDeJuego = (() => {
       }
   }
 
-  const pedirCarta = () => {
-      /**
-       * Metodo encargado de sacar una carta de la baraja, y a su vez eliminarla
-       * del arreglo deck, para no volverla a mostrar.
-       */
-
-      if (deck.length === 0){
-          throw "No hay cartas en la baraja."
-      }
-      return deck.pop();
-  }
-
-  const valorCarta = ( carta ) => {
-      /**
-       * Metodo encargado de asignar un valor numerio
-       * a la carta tratada. Tomando en cuenta si es una letra o numero.
-       */
-
-      const valor = carta.substring(0, carta.length - 1);
-      return ( isNaN(valor) ) ? 
-              (valor === "A") ? 11 : 10 
-              : valor * 1;
-  }
-
   const acumularPuntos = ( carta, turno ) => {
       /**
        * Metodo encargado de almacenar los puntos, teniendo en cuenta el numero de jugadores.
@@ -83,7 +62,7 @@ const moduloDeJuego = (() => {
   }
 
   const crearCarta = (carta, turno) => {
-      const imagCarta = document.createElement("img"); // Crea el elemento img 
+      const imagCarta = document.createElement("img"); // Crea el elemento img
       imagCarta.src = `assets/cartas/${carta}.png`; // Se le agrega el src
       imagCarta.classList.add('cartas'); // Carge de css cartas al componente img
       divCartasJugadores[turno].append(imagCarta); // Pinta el elemento en el HTML
@@ -115,7 +94,7 @@ const moduloDeJuego = (() => {
 
       let puntosComputadora = 0;
       do {
-          const carta = pedirCarta();
+          const carta = pedirCarta(deck);
           puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
           crearCarta(carta, puntosJugadores.length - 1);
 
@@ -133,7 +112,7 @@ const moduloDeJuego = (() => {
        * Evento responsable de la accion al instante de hacer click,
        * en el boton pedir carta.
        */
-      const carta = pedirCarta();
+      const carta = pedirCarta(deck);
       const puntosJugador = acumularPuntos(carta, 0);
       crearCarta(carta, 0);
 
@@ -166,7 +145,7 @@ const moduloDeJuego = (() => {
 
   /**
    *  Este es el retorno del modulo en general. Detro de este objeto devuelto, se agregan las funciones que
-   *  queremos exponer publicamente desde afuera. De este manera 
+   *  queremos exponer publicamente desde afuera. De este manera
    */
   return {
       nuevoJuego: inicializarJuego
