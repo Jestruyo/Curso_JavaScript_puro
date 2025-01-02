@@ -4,7 +4,7 @@
  * @param {string} carta 
  * @returns {number} retorna el valor numerico de la carta.
  */
-const valorCarta = ( carta ) => {
+ export const valorCarta = ( carta ) => {
     /**
      * Metodo encargado de asignar un valor numerio
      * a la carta tratada. Tomando en cuenta si es una letra o numero.
@@ -15,5 +15,3 @@ const valorCarta = ( carta ) => {
             (valor === "A") ? 11 : 10
             : valor * 1;
 }
-
-export default valorCarta;

@@ -3,7 +3,7 @@
  * @param {Array} deck 
  * @returns {string} retorna el valor de la carta aleatoria.
  */
-const pedirCarta = (deck) => {
+export const pedirCarta = (deck) => {
     /**
      * Metodo encargado de sacar una carta de la baraja, y a su vez eliminarla
      * del arreglo deck, para no volverla a mostrar.
@@ -14,5 +14,3 @@ const pedirCarta = (deck) => {
     }
     return deck.pop();
 }
-
-export default pedirCarta;

@@ -1,7 +1,5 @@
-import {crearDeck} from './useCasesModules/crear-deck.js';
 import usecomponentes from './selectoresHtml/componentesHtml.js';
-import pedirCarta from './useCasesModules/pedirCarta.js';
-import valorCarta from './useCasesModules/valorCarta.js';
+import {crearDeck, pedirCarta, valorCarta} from './useCasesModules/index.js'
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diaminds
