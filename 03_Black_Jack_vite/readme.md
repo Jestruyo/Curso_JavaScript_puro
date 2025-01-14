@@ -10,13 +10,16 @@ Este proyecto es la base para plasmar en practica los conocimento adquiridos sob
         * Seleccion de framework
         * Y el tipo de lenguaje Js o TypeScript
 
+# npm install
+-   Comando para instalar las dependencias necesarias del proyecto.
+
 # npm run dev
--   Para correr en local es proyecto recien creado se usa el siguiente comando teniendo en cueta los script del package.json
+-   Comando para correr en local el proyecto recien creado, teniendo en cueta los script del package.json
         
         * Levanta el localhost para pruebas locales.
 
 # npm run build
--   Para preparar el proyecto para produccion se minimiza el codigo fuente con el siguiente comando teniendo en cuenta los script del package.json
+-   Comando para preparar el proyecto para produccion y minimiza el codigo fuente teniendo en cuenta los script del package.json
         
         * Comprime de forma corta o minimizada todos los modulos de nuestro programa dentro de una carpeta de distribucion dist, que se crea automaticamente.
         * Esta carpeta se toma completa y se puede deployar en cualquier servidor web.
